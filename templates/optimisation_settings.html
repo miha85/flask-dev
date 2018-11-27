@@ -1,0 +1,10 @@
+{% extends "layout3.html" %}
+{% block body %}
+<div class="container">    
+    <h2>{{ title }}</h2>
+    <form action="{{ url_for('startOpt') }}" method="post">
+        <button name="optiBtn" type="submit">Optimiziraj!</button>
+    </form>
+    
+</div>
+{% endblock %}

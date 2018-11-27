@@ -1,0 +1,13 @@
+{% extends "layout3.html" %}
+{% block body %}
+
+<div class="container">
+    <h2>{{ title }}</h2>
+    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">    
+        <input type=file name=document>
+        <button name="upload" type="submit">Nalozi</button>
+    </form>
+    
+</div>
+
+{% endblock %}

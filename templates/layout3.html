@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+
+
+<head>
+    <title>ProOpter</title>
+    <link rel="stylesheet" href="/static/loading_style.css" type="text/css">
+    <link rel="stylesheet" href="/static/style.css" type="text/css">
+    <script type="text/javascript">// <![CDATA[
+        function loading(){
+            document.getElementById("loading").style.display = "inline";
+            document.getElementById("content").style.display = "block";
+        }
+// ]]></script>
+</head>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+            <div class="container-fluid">
+            <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('root') }}">TRIMO</a>
+        </div>
+        <ul class="nav navbar-nav">
+            {% if g.logged_in -%}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('load_data_page') }}">Podatki
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                    <li><a href="{{ url_for('load_data_page') }}">Naloži podatke (xlsx)</a></li>
+                    <li><a href="{{ url_for('load_data_profile_page') }}">Pregled podatkov</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('root') }}">Optimizacija
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                    <li><a href="{{ url_for('root') }}">Urejanje rezultatov</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('root') }}">Ročno urejanje</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout  ({{session.get('key')}})</a>
+            {% else -%}
+                <li><a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </ul>
+    </div>    
+
+
+</nav>
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+<body>
+    <div id="loading"></div>
+    <div id="content">
+        <h3>Header loading content:</h3>
+        <p>
+        <form action="{{ url_for('load_data_profile_page') }}" method="GET">
+            <input type="submit" name="anything_submit" value="Submit" onclick="loading();">
+        </form>
+        </p>
+    </div>
+</body>
+
+
+{% block body %}
+
+
+
+{% endblock %}
+
