@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-
-
 <head>
     <title>ProOpter</title>
-    <link rel="stylesheet" href="/static/loading_style.css" type="text/css">
-    <link rel="stylesheet" href="/static/style.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">// <![CDATA[
         function loading(){
             document.getElementById("loading").style.display = "inline";
@@ -14,14 +14,13 @@
 // ]]></script>
 </head>
 
-<nav class="navbar navbar-default">
-    <div class="container">
-            <div class="container-fluid">
-            <div class="navbar-header">
-            <a class="navbar-brand" href="{{ url_for('root') }}">TRIMO</a>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('root') }}">GOSTOP analytics</a>
         </div>
+        {% if g.logged_in -%}
         <ul class="nav navbar-nav">
-            {% if g.logged_in -%}
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url_for('load_data_page') }}">Podatki
                     <span class="caret"></span></a>
@@ -38,16 +37,17 @@
                     </ul>
                 </li>
                 <li><a href="{{ url_for('root') }}">Ročno urejanje</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout  ({{session.get('key')}})</a>
-            {% else -%}
-                <li><a href="{{ url_for('login') }}">Login</a>
-            {% endif %}
         </ul>
-    </div>    
-
-
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('logout') }}">Logout ({{session.get('key')}})</a>
+        </ul>
+        {% else -%}
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+        </ul>
+        {% endif %}
+    </div>
 </nav>
-
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -60,22 +60,8 @@
 {% endwith %}
 
 
-<body>
-    <div id="loading"></div>
-    <div id="content">
-        <h3>Header loading content:</h3>
-        <p>
-        <form action="{{ url_for('load_data_profile_page') }}" method="GET">
-            <input type="submit" name="anything_submit" value="Submit" onclick="loading();">
-        </form>
-        </p>
-    </div>
-</body>
-
 
 {% block body %}
-
-
 
 {% endblock %}
 

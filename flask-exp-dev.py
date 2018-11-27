@@ -192,7 +192,7 @@ def load_data_profile_page():
     report_filename =UPLOADS_DEFAULT_DEST + 'profiles/' + session['laste-session-filename'] + ".html"
     report.to_file(outputfile=report_filename)
     #return Response(report.html, mimetype="text/html")
-    return render_template('blank.html', url_html=report_filename)
+    return render_template('data_overview.html', url_html=report_filename)
 
 ###############################################################################
 

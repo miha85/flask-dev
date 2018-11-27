@@ -1,0 +1,24 @@
+
+<link rel="stylesheet" href="/static/loading_style.css" type="text/css">
+
+{% extends "layout3.html" %}
+{% block body %}
+
+
+
+<div class="container">
+    <div id="loading"></div>
+    <div id="content">
+        <h3>Header loading content:</h3>
+        <p>
+        <form action="{{ url_for('load_data_profile_page') }}" method="GET">
+            <input type="submit" name="anything_submit" value="Submit" onclick="loading();">
+        </form>
+        </p>
+        <object type="text/html" width = "100%" height="100%" data="{{ url_html }}">
+        </object>
+    </div>
+</div>
+
+
+{% endblock %}
